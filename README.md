@@ -5,13 +5,12 @@ This project is a web app for running experiments with Parkinson's disease patie
 The project has three parts that run together:
 
 - **frontend**: React (Vite) and TypeScript. This is the part the experimenter actually uses in the browser.
-- **Backend**: NestJS backend. Handles login and forwards experiment data requests to the mock API below.
+- **Backend**: NestJS backend. Forwards experiment data requests to the mock API below.
 - **experiment-api**: a small Express mock API that stores participants, experiments and exercises. This simulates the real data collection service.
 
 ## Login
 
-Username: rehan_teacher
-Password: mySecurePassword123
+The login screen accepts any username and password.
 
 ## How to run it
 
@@ -48,11 +47,11 @@ npm install
 npm run dev
 ```
 
-This runs on http://localhost:5173. Open that address in your browser and log in with the credentials above.
+This runs on http://localhost:5173. Open that address in your browser and log in with any username and password.
 
 ## How the pieces talk to each other
 
-The frontend never calls the backend or the mock API directly by full address. Instead, Vite's dev server proxies a few paths (/experiments, /exercises, /auth) to the backend on port 3000, so the frontend can just call something like /experiments and it gets forwarded automatically. The backend then forwards experiment and exercise requests on to the mock API on port 8080, and handles login itself using the users stored in Backend/backend-project/users.json.
+The frontend never calls the backend or the mock API directly by full address. Instead, Vite's dev server proxies a few paths (/experiments, /exercises) to the backend on port 3000, so the frontend can just call something like /experiments and it gets forwarded automatically. The backend then forwards those requests on to the mock API on port 8080.
 
 ## What the app does
 

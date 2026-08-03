@@ -10,31 +10,11 @@ const Login: FC = () => {
   const [, navigate] = useLocation()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setError("")
-    setLoading(true)
-    try {
-      const res = await fetch("/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      })
-      if (!res.ok) {
-        setError("Invalid username or password.")
-        return
-      }
-      const data = await res.json()
-      localStorage.setItem("token", data.access_token)
-      navigate("/home")
-    } catch {
-      setError("Could not reach the server. Is the backend running?")
-    } finally {
-      setLoading(false)
-    }
+    localStorage.setItem("token", "demo")
+    navigate("/home")
   }
 
   return (
@@ -63,10 +43,8 @@ const Login: FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {error && <p className="login-error">{error}</p>}
-
-          <Button type="submit" fullWidth disabled={loading}>
-            {loading ? "Signing in…" : "Log In"}
+          <Button type="submit" fullWidth>
+            Log In
           </Button>
         </form>
       </Card>
