@@ -1,0 +1,37 @@
+.ui-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ui-field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.ui-control {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  background: #fff;
+  font-family: inherit;
+  color: var(--text);
+}
+
+.ui-control:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.ui-control--textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.ui-field-error {
+  font-size: 12px;
+  color: var(--danger);
+}

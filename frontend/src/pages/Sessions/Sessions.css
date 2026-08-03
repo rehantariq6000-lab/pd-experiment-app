@@ -1,0 +1,15 @@
+.sessions-page {
+  display: block;
+}
+
+.sessions-page .pagination {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.sessions-page .pagination-info {
+  font-size: 13px;
+  color: var(--muted);
+}

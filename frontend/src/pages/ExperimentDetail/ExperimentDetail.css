@@ -1,0 +1,81 @@
+.exp-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.exp-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.exp-sidebar-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.exp-id {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.exp-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+.patient-data {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+.patient-data-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.patient-data-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.patient-data-value {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.exp-exercises-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.exp-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.exp-content-title {
+  font-size: 20px;
+  margin: 0;
+}
+
+.exp-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}

@@ -1,0 +1,27 @@
+.ui-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.ui-card--flush {
+  padding: 0;
+  overflow: hidden;
+}
+
+.ui-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ui-card-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+.ui-card-header {
+  margin-bottom: 14px;
+}

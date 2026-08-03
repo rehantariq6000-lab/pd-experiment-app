@@ -1,0 +1,101 @@
+.setup-card {
+  margin-top: 16px;
+}
+
+.setup-hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+
+.setup-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.setup-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+
+.setup-row--off {
+  opacity: 0.55;
+}
+
+.setup-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.setup-row-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.setup-row-tag {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.setup-order-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.setup-order-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setup-order-btn {
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.setup-order-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.setup-sensor-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.setup-calibrate-all {
+  margin-top: 12px;
+}
+
+.setup-warning {
+  font-size: 13px;
+  color: var(--danger);
+  margin: 14px 0 0;
+}
+
+.setup-start {
+  margin-top: 18px;
+}

@@ -1,0 +1,30 @@
+.start-card {
+  margin-bottom: 8px;
+}
+
+.start-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.start-row .ui-field {
+  flex: 1;
+  max-width: 320px;
+}
+
+.table-head-actions {
+  margin-left: auto;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.pagination-info {
+  font-size: 13px;
+  color: var(--muted);
+}

@@ -1,0 +1,55 @@
+/* Global design tokens (the app's palette) + base resets.
+   Every component reads these CSS variables so the look stays consistent. */
+:root {
+  --bg: #f4f5f7;
+  --panel: #ffffff;
+  --border: #d6d9de;
+  --text: #222629;
+  --muted: #6b7280;
+  --accent: #2f6fed;
+  --accent-soft: #e8f0fe;
+  --green: #2e7d32;
+  --green-soft: #e7f3e8;
+  --amber: #9a6b1f;
+  --amber-soft: #f6efdf;
+  --danger: #c0392b;
+  --radius: 6px;
+
+  /* Recharts example tokens (used by the Reports line chart) */
+  --color-border-3: #d6d9de;
+  --color-border-2: #c4c4c4;
+  --color-text-3: #6b7280;
+  --color-surface-raised: #ffffff;
+  --color-surface-base: #ffffff;
+  --color-chart-1: #2f6fed;
+  --color-chart-2: #2e7d32;
+
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+code {
+  background: #f0f1f3;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 12px;
+}

@@ -1,0 +1,108 @@
+.recording-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.finalize-btn {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.finalize-btn:hover:not(:disabled) {
+  background: #276a2b;
+  border-color: #276a2b;
+}
+
+.recording-meta {
+  display: flex;
+  gap: 40px;
+  margin: 16px 0;
+}
+
+.recording-meta-label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.recording-meta-value {
+  display: block;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.recording-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+}
+
+.recording-status {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.recording-instructions,
+.recording-progress-card,
+.recording-notes-card {
+  margin-top: 16px;
+}
+
+.recording-tag {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+
+.instruction-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.next-btn {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.next-btn:hover:not(:disabled) {
+  background: #276a2b;
+  border-color: #276a2b;
+}
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-weight: 600;
+}
+
+.progress-track {
+  height: 10px;
+  background: var(--accent-soft);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.progress-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}

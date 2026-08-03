@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clinical Research — Wireframes</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #e9eaec; color: #2b2f33; padding: 30px 20px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .page-title { font-size: 20px; font-weight: 700; }
+  .page-sub { font-size: 12px; color: #6b7280; margin: 3px 0 16px; }
+
+  /* browser window */
+  .browser { width: 1180px; max-width: 100%; border: 1px solid #c7cbd1; border-radius: 8px;
+    overflow: hidden; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+  .chrome { display: flex; align-items: center; gap: 10px; background: #f1f2f4;
+    border-bottom: 1px solid #d6d9de; padding: 9px 12px; }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #c7cbd1; }
+  .addr { flex: 1; background: #fff; border: 1px solid #d6d9de; border-radius: 5px;
+    font-size: 12px; color: #8b9097; padding: 5px 10px; }
+
+  /* app layout */
+  .app { display: flex; min-height: 680px; }
+  .sidebar { width: 210px; border-right: 1px solid #d6d9de; padding: 22px 16px; }
+  .brand { font-size: 16px; font-weight: 700; }
+  .brand small { display: block; font-size: 12px; color: #8b9097; font-weight: 400; margin-top: 2px; }
+  .nav { margin-top: 24px; display: flex; flex-direction: column; gap: 4px; }
+  .nav a { font-size: 14px; color: #2b2f33; text-decoration: none; padding: 9px 12px;
+    border-radius: 6px; cursor: pointer; }
+  .nav a.active { background: #ededf0; font-weight: 600; }
+  .main { flex: 1; padding: 26px 30px; }
+
+  h1.title { font-size: 20px; }
+  .title-sub { font-size: 13px; color: #6b7280; margin: 2px 0 16px; }
+  .row-between { display: flex; justify-content: space-between; align-items: flex-start; }
+
+  .card { border: 1px solid #d6d9de; border-radius: 6px; padding: 18px; }
+  .card.flush { padding: 0; overflow: hidden; }
+  h3 { font-size: 15px; margin-bottom: 12px; }
+  .label { font-size: 12px; color: #8b9097; }
+
+  input, select, textarea { font-family: inherit; }
+  .fld { width: 100%; padding: 9px 11px; border: 1px solid #c7cbd1; border-radius: 6px;
+    font-size: 13px; background: #fff; color: #2b2f33; }
+  .fld.ro { background: #f2f3f5; color: #8b9097; }
+  .grid { display: grid; gap: 14px; }
+  .fieldwrap { display: flex; flex-direction: column; gap: 5px; }
+  .fieldwrap .label { font-weight: 600; }
+
+  .btn { border: 1px solid #c7cbd1; background: #fff; color: #2b2f33; border-radius: 6px;
+    padding: 9px 16px; font-size: 13px; font-weight: 600; cursor: pointer; }
+  .btn.solid { background: #6b7280; color: #fff; border-color: #6b7280; }
+  .btn.sm { padding: 6px 12px; font-size: 12px; }
+  .btn.block { width: 100%; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { text-align: left; color: #8b9097; background: #f7f8f9; }
+  th, td { padding: 11px 15px; }
+  tbody tr { border-top: 1px solid #e1e3e6; }
+  tbody tr.click { cursor: pointer; }
+  tbody tr.click:hover { background: #f7f8f9; }
+  tbody tr.selected { background: #ededf0; box-shadow: inset 3px 0 0 #6b7280; }
+  .pill { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px;
+    border: 1px solid #c7cbd1; color: #5c6166; }
+
+  .caption { font-size: 12px; color: #8b9097; margin-top: 8px; }
+  .note { border: 1px dashed #c7cbd1; background: #f7f8f9; border-radius: 6px;
+    padding: 12px 14px; font-size: 13px; color: #5c6166; }
+
+  /* login */
+  .login-wrap { display: flex; align-items: center; justify-content: center;
+    min-height: 680px; width: 100%; }
+  .login-card { width: 340px; border: 1px solid #d6d9de; border-radius: 8px; padding: 26px; }
+  .login-card h2 { font-size: 18px; text-align: center; }
+  .login-card .sub { font-size: 12px; color: #8b9097; text-align: center; margin: 3px 0 20px; }
+
+  .screen { display: none; }
+  .screen.on { display: block; }
+
+  /* condition cards */
+  .cond { display: flex; gap: 12px; }
+  .cond .opt { flex: 1; border: 1px solid #c7cbd1; border-radius: 6px; padding: 14px; text-align: center; }
+  .cond .opt.sel { background: #ededf0; border-color: #9aa0a6; font-weight: 700; }
+  .cond .opt small { display: block; color: #8b9097; font-weight: 400; margin-top: 3px; }
+  ol.order { margin: 6px 0 0 18px; font-size: 13px; color: #5c6166; }
+  ol.order li { padding: 3px 0; }
+
+  .grid2 { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .metric { border: 1px solid #e1e3e6; border-radius: 6px; padding: 14px; }
+  .metric .num { font-size: 22px; font-weight: 700; margin-top: 4px; }
+
+  .progress-track { height: 10px; background: #ededf0; border-radius: 99px; overflow: hidden; }
+  .progress-fill { width: 60%; height: 100%; background: #9aa0a6; }
+
+  .hint-bar { font-size: 11px; color: #8b9097; margin-top: 10px; }
+
+  /* reports master-detail */
+  .rep-layout { display: grid; grid-template-columns: 300px 1fr; gap: 18px; align-items: start; }
+  .rep-list-head { font-size: 12px; font-weight: 700; color: #8b9097; text-transform: uppercase;
+    letter-spacing: .04em; padding: 14px 16px; border-bottom: 1px solid #e1e3e6; background: #f7f8f9; }
+  .rep-item { padding: 14px 16px; border-bottom: 1px solid #e1e3e6; cursor: pointer; }
+  .rep-item:last-child { border-bottom: none; }
+  .rep-item:hover { background: #f7f8f9; }
+  .rep-item.selected { background: #ededf0; box-shadow: inset 3px 0 0 #6b7280; }
+  .rep-item-main { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .rep-item-sub { font-size: 12px; color: #8b9097; margin-top: 4px; }
+  .rep-detail .metrics { grid-template-columns: repeat(4, 1fr); }
+</style>
+</head>
+<body>
+  <div class="page-title">Clinical Research — Interactive Wireframes</div>
+  <div class="page-sub">Low-fidelity desktop prototype · click through the flow</div>
+
+  <div class="browser">
+    <div class="chrome">
+      <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <div class="addr" id="addr">https://clinical-research.app/login</div>
+    </div>
+
+    <!-- ============ SCREEN 1 — LOGIN ============ -->
+    <div class="screen on" id="s-login">
+      <div class="login-wrap">
+        <div class="login-card">
+          <h2>Clinical Research</h2>
+          <div class="sub">Experimenter sign in</div>
+          <div class="fieldwrap" style="margin-bottom:12px;">
+            <span class="label">Email</span>
+            <input class="fld" placeholder="experimenter@srh.de" />
+          </div>
+          <div class="fieldwrap" style="margin-bottom:18px;">
+            <span class="label">Password</span>
+            <input class="fld" type="password" placeholder="••••••••" />
+          </div>
+          <button class="btn solid block" onclick="go('s-participants')">Log In</button>
+          <div class="caption" style="text-align:center;">Forgot password?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SCREEN 2 — PARTICIPANTS / REGISTER ============ -->
+    <div class="screen" id="s-participants">
+      <div class="app">
+        <aside class="sidebar" data-sb></aside>
+        <section class="main">
+          <div class="row-between">
+            <h1 class="title">Participants</h1>
+          </div>
+          <div class="title-sub">Register a new participant (anonymous — auto-generated ID).</div>
+
+          <div class="card">
+            <h3>Register New Participant</h3>
+            <div class="grid" style="grid-template-columns: 1fr 1fr 1fr;">
+              <div class="fieldwrap"><span class="label">Participant ID (auto-generated)</span>
+                <input class="fld ro" value="PT-0045" readonly /></div>
+              <div class="fieldwrap"><span class="label">Date of Birth</span>
+                <input class="fld" type="date" /></div>
+              <div class="fieldwrap"><span class="label">Clinical Status</span>
+                <select class="fld"><option>Healthy Control</option><option>Parkinson's (PD)</option></select></div>
+              <div class="fieldwrap"><span class="label">Weight (kg)</span>
+                <input class="fld" placeholder="e.g. 68" /></div>
+              <div class="fieldwrap"><span class="label">Height (cm)</span>
+                <input class="fld" placeholder="e.g. 170" /></div>
+            </div>
+            <label style="display:flex; align-items:center; gap:8px; margin-top:16px; font-size:13px;">
+              <input type="checkbox" /> Participant has signed consent / compliance form
+            </label>
+            <button class="btn solid" style="margin-top:16px;">Save Participant</button>
+          </div>
+
+          <h3 style="margin-top:24px;">Recent Participants</h3>
+          <div class="card flush">
+            <table>
+              <thead><tr><th>Participant ID</th><th>Clinical Status</th><th>Age</th><th>Date Registered</th></tr></thead>
+              <tbody>
+                <tr><td>PT-0042</td><td>PD</td><td>67</td><td>Oct 24, 2023</td></tr>
+                <tr><td>PT-0031</td><td>PD</td><td>72</td><td>Oct 18, 2023</td></tr>
+                <tr><td>PT-0018</td><td>Healthy Control</td><td>45</td><td>Oct 11, 2023</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hint-bar">Next: go to <b>Sessions</b> in the sidebar to start a test.</div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ============ SCREEN 3 — SESSIONS ============ -->
+    <div class="screen" id="s-sessions">
+      <div class="app">
+        <aside class="sidebar" data-sb></aside>
+        <section class="main">
+          <h1 class="title">Sessions</h1>
+          <div class="title-sub">Welcome, Experimenter</div>
+
+          <div class="card">
+            <h3>Start New Session</h3>
+            <div style="display:flex; gap:12px; align-items:flex-end;">
+              <div class="fieldwrap" style="flex:1; max-width:320px;">
+                <span class="label">Select Participant</span>
+                <select class="fld"><option>PT-0042 · PD</option><option>PT-0031 · PD</option><option>PT-0018 · Healthy Control</option></select>
+              </div>
+              <button class="btn solid" onclick="go('s-conditions')">Start Session →</button>
+            </div>
+          </div>
+
+          <h3 style="margin-top:24px;">Recent Sessions</h3>
+          <div class="card flush">
+            <table>
+              <thead><tr><th>Session ID</th><th>Participant</th><th>Date</th><th>Status</th></tr></thead>
+              <tbody id="sess-rows">
+                <tr><td>SES-1042</td><td>PT-0042 · PD</td><td>Oct 24, 2023</td><td><span class="pill">In Progress</span></td></tr>
+                <tr><td>SES-1031</td><td>PT-0031 · PD</td><td>Oct 18, 2023</td><td><span class="pill">Completed</span></td></tr>
+                <tr><td>SES-1020</td><td>PT-0018 · Healthy</td><td>Oct 11, 2023</td><td><span class="pill">Completed</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hint-bar">After finalizing a session, it appears at the top of Recent Sessions.</div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ============ SCREEN 4 — SET UP CONDITIONS ============ -->
+    <div class="screen" id="s-conditions">
+      <div class="app">
+        <aside class="sidebar" data-sb></aside>
+        <section class="main">
+          <h1 class="title">Set Up Conditions</h1>
+          <div class="title-sub">Participant: PT-0042 · PD</div>
+
+          <div class="card">
+            <h3>Step size (auto-selected, sex-adjusted)</h3>
+            <div class="cond">
+              <div class="opt sel">Small<small>51.2 cm</small></div>
+              <div class="opt sel">Medium<small>76.8 cm</small></div>
+              <div class="opt sel">Big<small>89.6 cm</small></div>
+            </div>
+            <h3 style="margin-top:20px;">Randomized condition order (auto-generated)</h3>
+            <ol class="order">
+              <li>Medium steps — 76.8 cm</li>
+              <li>Big steps — 89.6 cm</li>
+              <li>Small steps — 51.2 cm</li>
+            </ol>
+          </div>
+
+          <div class="card" style="margin-top:16px;">
+            <h3>Guidelines for Participant</h3>
+            <ul style="margin-left:18px; font-size:13px; color:#5c6166; line-height:1.9;">
+              <li>Walk along the marked route at the indicated step size.</li>
+              <li>Pronounce the displayed syllables / words clearly while walking.</li>
+              <li>Keep a steady pace; repeat the task if asked.</li>
+              <li>Tell the experimenter if you feel uncomfortable — you may stop at any time.</li>
+            </ul>
+          </div>
+
+          <button class="btn solid" style="margin-top:16px;" onclick="go('s-recording')">Start Recording →</button>
+        </section>
+      </div>
+    </div>
+
+    <!-- ============ SCREEN 5 — ACTIVE RECORDING ============ -->
+    <div class="screen" id="s-recording">
+      <div class="app">
+        <aside class="sidebar" data-sb></aside>
+        <section class="main">
+          <div class="row-between">
+            <div>
+              <div class="label">Protocol Name</div>
+              <h1 class="title">Gait &amp; Speech Protocol v1</h1>
+            </div>
+            <button class="btn solid" onclick="go('s-sessions')">Finalize Session</button>
+          </div>
+
+          <div style="display:flex; gap:40px; margin-top:14px;">
+            <div><div class="label" style="font-weight:600;">Participant</div>
+              <div style="font-weight:700;">PT-0042 · PD</div></div>
+            <div><div class="label" style="font-weight:600;">Current Task</div>
+              <div style="font-weight:700;">Pronounce “KICK” while walking</div></div>
+          </div>
+          <div class="title-sub" style="margin-top:12px;">Current Condition: <b>Medium Steps · 76.8 cm</b></div>
+
+          <div class="grid2">
+            <div class="card">
+              <h3>Real-time Gait &amp; Speech Visualization</h3>
+              <svg viewBox="0 0 640 220" width="100%">
+                <line x1="20" y1="40" x2="620" y2="40" stroke="#e1e3e6"/>
+                <line x1="20" y1="100" x2="620" y2="100" stroke="#e1e3e6"/>
+                <line x1="20" y1="160" x2="620" y2="160" stroke="#e1e3e6"/>
+                <polyline fill="none" stroke="#6b7280" stroke-width="2.5"
+                  points="20,140 90,110 160,130 230,80 300,105 370,65 440,95 510,60 580,90 620,105"/>
+                <polyline fill="none" stroke="#b0b4ba" stroke-width="2.5"
+                  points="20,175 90,165 160,180 230,150 300,162 370,140 440,158 510,138 580,158 620,150"/>
+                <rect x="20" y="196" width="12" height="12" rx="2" fill="#6b7280"/>
+                <text x="38" y="206" font-size="12" fill="#6b7280">Mouth Opening (mm)</text>
+                <rect x="200" y="196" width="12" height="12" rx="2" fill="#b0b4ba"/>
+                <text x="218" y="206" font-size="12" fill="#6b7280">Voice Volume (dB)</text>
+              </svg>
+            </div>
+            <div class="card">
+              <h3>Real-time Audio Waveform</h3>
+              <svg viewBox="0 0 280 130" width="100%">
+                <g fill="#9aa0a6">
+                  <rect x="6" y="55" width="6" height="20" rx="1"/><rect x="18" y="40" width="6" height="50" rx="1"/>
+                  <rect x="30" y="25" width="6" height="80" rx="1"/><rect x="42" y="48" width="6" height="34" rx="1"/>
+                  <rect x="54" y="20" width="6" height="90" rx="1"/><rect x="66" y="52" width="6" height="26" rx="1"/>
+                  <rect x="78" y="35" width="6" height="60" rx="1"/><rect x="90" y="15" width="6" height="100" rx="1"/>
+                  <rect x="102" y="45" width="6" height="40" rx="1"/><rect x="114" y="30" width="6" height="70" rx="1"/>
+                  <rect x="126" y="50" width="6" height="30" rx="1"/><rect x="138" y="22" width="6" height="86" rx="1"/>
+                  <rect x="150" y="42" width="6" height="46" rx="1"/><rect x="162" y="28" width="6" height="74" rx="1"/>
+                  <rect x="174" y="52" width="6" height="26" rx="1"/><rect x="186" y="18" width="6" height="94" rx="1"/>
+                  <rect x="198" y="46" width="6" height="38" rx="1"/><rect x="210" y="32" width="6" height="66" rx="1"/>
+                  <rect x="222" y="50" width="6" height="30" rx="1"/><rect x="234" y="25" width="6" height="80" rx="1"/>
+                  <rect x="246" y="48" width="6" height="34" rx="1"/><rect x="258" y="38" width="6" height="54" rx="1"/>
+                </g>
+              </svg>
+              <div class="caption">● Recording audio…</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px;">
+            <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:8px;">
+              <b>Protocol Progress</b><span style="color:#8b9097;">60%</span></div>
+            <div class="progress-track"><div class="progress-fill"></div></div>
+            <div style="display:flex; gap:10px; margin-top:14px;">
+              <button class="btn">Pause</button><button class="btn">Resume</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px;">
+            <h3>Notes / Annotations</h3>
+            <textarea class="fld" style="min-height:80px; resize:vertical;"
+              placeholder="Add notes for this exercise (participant fatigue, tremor observed, mispronunciation, sensor adjusted)…"></textarea>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+              <span class="caption" style="margin-top:0;">Notes are saved with the recording for this exercise.</span>
+              <button class="btn sm">Save Note</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ============ SCREEN 6 — REPORTS ============ -->
+    <div class="screen" id="s-reports">
+      <div class="app">
+        <aside class="sidebar" data-sb></aside>
+        <section class="main">
+          <h1 class="title">Reports</h1>
+          <div class="title-sub">Select a session to view its recorded data.</div>
+
+          <div class="rep-layout">
+            <!-- LEFT: session list -->
+            <div class="card flush rep-list">
+              <div class="rep-list-head">Sessions</div>
+              <div id="rep-rows">
+                <div class="rep-item selected" data-id="SES-1042" data-part="PT-0042 · PD" data-date="Oct 24, 2023"
+                     data-mean="13.1 mm" data-peak="18.7 mm" data-vol="65.8 dB" data-dur="14.2 min">
+                  <div class="rep-item-main"><b>SES-1042</b><span class="pill">Completed</span></div>
+                  <div class="rep-item-sub">PT-0042 · PD · Oct 24, 2023</div>
+                </div>
+                <div class="rep-item" data-id="SES-1031" data-part="PT-0031 · PD" data-date="Oct 18, 2023"
+                     data-mean="11.4 mm" data-peak="15.2 mm" data-vol="60.1 dB" data-dur="12.8 min">
+                  <div class="rep-item-main"><b>SES-1031</b><span class="pill">Completed</span></div>
+                  <div class="rep-item-sub">PT-0031 · PD · Oct 18, 2023</div>
+                </div>
+                <div class="rep-item" data-id="SES-1020" data-part="PT-0018 · Healthy" data-date="Oct 11, 2023"
+                     data-mean="16.9 mm" data-peak="21.4 mm" data-vol="70.3 dB" data-dur="13.5 min">
+                  <div class="rep-item-main"><b>SES-1020</b><span class="pill">Completed</span></div>
+                  <div class="rep-item-sub">PT-0018 · Healthy · Oct 11, 2023</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT: selected session detail -->
+            <div class="card rep-detail">
+              <div class="row-between" style="align-items:flex-start;">
+                <div>
+                  <div class="label">Session Report</div>
+                  <h2 style="font-size:19px; margin-top:2px;" id="rep-head">SES-1042</h2>
+                  <div class="caption" style="margin-top:3px;" id="rep-meta">PT-0042 · PD · Oct 24, 2023 · 3 conditions recorded</div>
+                </div>
+                <button class="btn sm">Export Report ⤓</button>
+              </div>
+
+              <div class="label" style="font-weight:600; margin:18px 0 8px;">Key Metrics</div>
+              <div class="metrics">
+                <div class="metric"><div class="label">Mean Mouth Opening</div><div class="num" id="rm-mean">13.1 mm</div></div>
+                <div class="metric"><div class="label">Peak Mouth Opening</div><div class="num" id="rm-peak">18.7 mm</div></div>
+                <div class="metric"><div class="label">Mean Voice Volume</div><div class="num" id="rm-vol">65.8 dB</div></div>
+                <div class="metric"><div class="label">Session Duration</div><div class="num" id="rm-dur">14.2 min</div></div>
+              </div>
+
+              <div class="label" style="font-weight:600; margin:20px 0 8px;">Summary by condition</div>
+              <div class="card flush" style="margin-bottom:4px;">
+                <table>
+                  <thead><tr><th>Condition</th><th>Mouth (mm)</th><th>Voice (dB)</th><th>Trials</th></tr></thead>
+                  <tbody>
+                    <tr><td>Small</td><td>12.4</td><td>61.2</td><td>3</td></tr>
+                    <tr><td>Medium</td><td>15.1</td><td>65.8</td><td>3</td></tr>
+                    <tr><td>Big</td><td>18.7</td><td>70.3</td><td>3</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="label" style="font-weight:600; margin:20px 0 8px;">Recorded data over session</div>
+              <svg viewBox="0 0 820 190" width="100%">
+                <line x1="30" y1="30" x2="800" y2="30" stroke="#e1e3e6"/>
+                <line x1="30" y1="90" x2="800" y2="90" stroke="#e1e3e6"/>
+                <line x1="30" y1="150" x2="800" y2="150" stroke="#e1e3e6"/>
+                <polyline fill="none" stroke="#6b7280" stroke-width="2.5"
+                  points="30,120 100,92 175,112 250,68 325,92 400,55 475,82 550,50 625,80 700,58 775,84"/>
+                <polyline fill="none" stroke="#b0b4ba" stroke-width="2.5"
+                  points="30,158 100,150 175,162 250,138 325,150 400,132 475,148 550,132 625,148 700,134 775,150"/>
+                <rect x="30" y="172" width="11" height="11" rx="2" fill="#6b7280"/>
+                <text x="46" y="181" font-size="11" fill="#6b7280">Mouth Opening (mm)</text>
+                <rect x="210" y="172" width="11" height="11" rx="2" fill="#b0b4ba"/>
+                <text x="226" y="181" font-size="11" fill="#6b7280">Voice Volume (dB)</text>
+              </svg>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+  const URLS = {
+    's-login': 'https://clinical-research.app/login',
+    's-participants': 'https://clinical-research.app/participants',
+    's-sessions': 'https://clinical-research.app/sessions',
+    's-conditions': 'https://clinical-research.app/session/setup',
+    's-recording': 'https://clinical-research.app/session/recording',
+    's-reports': 'https://clinical-research.app/reports',
+  };
+  const NAV = [
+    { id: 's-participants', label: 'Participants' },
+    { id: 's-sessions', label: 'Sessions' },
+    { id: 's-reports', label: 'Reports' },
+  ];
+  const ACTIVE_FOR = {
+    's-participants': 's-participants', 's-sessions': 's-sessions',
+    's-conditions': 's-sessions', 's-recording': 's-sessions', 's-reports': 's-reports',
+  };
+
+  function renderSidebars(current) {
+    document.querySelectorAll('[data-sb]').forEach(sb => {
+      const active = ACTIVE_FOR[current];
+      sb.innerHTML = '<div class="brand">Clinical Research<small>Wireframe</small></div>' +
+        '<nav class="nav">' + NAV.map(n =>
+          `<a class="${n.id===active?'active':''}" onclick="go('${n.id}')">${n.label}</a>`).join('') +
+        '</nav>';
+    });
+  }
+
+  function go(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+    document.getElementById(id).classList.add('on');
+    document.getElementById('addr').textContent = URLS[id] || '';
+    renderSidebars(id);
+    window.scrollTo(0, 0);
+  }
+
+  function toggleGraph() {
+    const box = document.getElementById('graph-box');
+    const btn = document.getElementById('graph-btn');
+    const open = box.style.display === 'none';
+    box.style.display = open ? 'block' : 'none';
+    btn.textContent = open ? 'Hide Graphs ▴' : 'See Graphs ▾';
+  }
+
+  // reports row selection
+  document.querySelectorAll('#rep-rows .rep-item').forEach(row => {
+    row.addEventListener('click', () => {
+      document.querySelectorAll('#rep-rows .rep-item').forEach(r => r.classList.remove('selected'));
+      row.classList.add('selected');
+      document.getElementById('rep-head').textContent = row.dataset.id;
+      document.getElementById('rep-meta').textContent =
+        row.dataset.part + ' · ' + row.dataset.date + ' · 3 conditions recorded';
+      document.getElementById('rm-mean').textContent = row.dataset.mean;
+      document.getElementById('rm-peak').textContent = row.dataset.peak;
+      document.getElementById('rm-vol').textContent = row.dataset.vol;
+      document.getElementById('rm-dur').textContent = row.dataset.dur;
+    });
+  });
+
+  renderSidebars('s-login');
+</script>
+</body>
+</html>

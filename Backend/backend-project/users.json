@@ -1,0 +1,28 @@
+[
+  {
+    "id": "1",
+    "username": "rehan_admin",
+    "password": "mySecurePassword123",
+    "roles": [
+      "user",
+      "admin"
+    ],
+    "fullName": "Rehan Tariq",
+    "emailAddress": "rehan@example.com",
+    "isBlocked": false,
+    "createdAt": "2026-06-04T08:41:54.374Z"
+  },
+  {
+    "id": "2",
+    "username": "rehan_teacher",
+    "passwordHash": "mySecurePassword123",
+    "roles": [
+      "user",
+      "admin"
+    ],
+    "fullName": "Rehan Tariq",
+    "emailAddress": "rehan@example.com",
+    "isBlocked": false,
+    "createdAt": "2026-06-04T08:44:32.186Z"
+  }
+]
